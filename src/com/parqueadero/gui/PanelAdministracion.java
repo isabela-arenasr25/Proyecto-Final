@@ -185,8 +185,6 @@ public class PanelAdministracion extends JPanel {
     }
 
     private void actualizarDisplayCapacidades() {
-        // Se necesita el objeto parqueadero actualizado para leer sus listas internas
-        // this.parqueadero debe estar actualizado por cargarDatosActualesParqueadero()
         StringBuilder sb = new StringBuilder("Capacidades Actuales:\n");
         for (TipoVehiculo tipo : TipoVehiculo.values()) {
             sb.append(tipo.getDescripcion()).append(": ").append(parqueadero.obtenerCapacidad(tipo)).append(" puestos\n");
@@ -239,7 +237,7 @@ public class PanelAdministracion extends JPanel {
                     boolean exito = controlador.establecerCapacidad(tipo, cantidad);
                     if (exito) {
                         JOptionPane.showMessageDialog(PanelAdministracion.this, "Capacidad para " + tipo.getDescripcion() + " establecida a " + cantidad);
-                        cargarDatosActualesParqueadero(); // Para refrescar los displays que leen de 'this.parqueadero'
+                        cargarDatosActualesParqueadero(); 
                         txtCantidadCapacidad.setText("");
                     } else {
                          JOptionPane.showMessageDialog(PanelAdministracion.this, "La cantidad no puede ser negativa o el tipo es nulo.", "Error", JOptionPane.ERROR_MESSAGE);

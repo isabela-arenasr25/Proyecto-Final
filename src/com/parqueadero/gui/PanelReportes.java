@@ -322,16 +322,9 @@ public class PanelReportes extends JPanel {
 
             boolean encontrados = false;
             for (Cliente cliente : clientes) {
-                // El controlador ya devuelve los clientes correctos.
-                // Iteramos sobre sus vehículos para encontrar la membresía que cumple la condición
-                // y así poder mostrar la placa y fecha de vencimiento específica.
                 for(Vehiculo v : cliente.getVehiculos()){
                     if(v.getMembresia() != null && v.getMembresia().estaActiva()){
                          LocalDateTime fechaFinMembresia = v.getMembresia().getFechaFin();
-                         // La lógica de "próximo a vencer" está en el servicio, el controlador solo la llama.
-                         // Aquí solo necesitamos mostrar los datos del cliente y su vehículo relevante.
-                         // Para ser más precisos, solo añadimos si este vehículo específico es el que tiene la membresía por vencer.
-                         // Esto podría ser más eficiente si el servicio/controlador devolviera (Cliente, VehiculoConMembresiaPorVencer)
                          if (fechaFinMembresia.isAfter(LocalDateTime.now()) && 
                              fechaFinMembresia.isBefore(LocalDateTime.now().plusDays(dias).plusSeconds(1))) { // +1 segundo para incluir el día completo
                             modeloTablaClientesProximosVencer.addRow(new Object[]{
